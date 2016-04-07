@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Interactive Video Player</title>
+    <link rel="stylesheet" href="css/normalize.css">
+	<link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/style.css">	
+  </head>
+  <body>
+
+  	<div id="wrapper">
+
+  		<div id="videoContainer">
+
+			<!-- Video -->
+		     <video id="video">
+		        <source src="video/video.mp4" type="video/mp4">
+		        <source src="video/video.ogg" type="video/ogg">      
+		        <track label="English" kind="subtitles" srclang="en" src="video/captions.vtt" default>
+		        <p>
+		          Your browser doesn't support HTML5 video.
+		          <a href="video/video.mp4">Download</a> the video instead.
+		        </p>
+		      </video>
+
+		    <!-- Video Controls -->
+			<div id="videoControls">
+				<input type="range" id="progressBar" value="0">
+				<input type="range" id="progress" value="0">				
+				<div id="buttons">	
+				    <button id="play"><img id="playImg" src="icons/play-icon.png"></button>
+				    <span id="duration"></span>
+				    <button id="fullScreen"><img id="fullScreenImg" src="icons/fullscreen-icon.png"></button>
+				    <button id="mute"><img id="muteImg" src="icons/volume-on-icon.png"></button>
+					<!-- <input type="range" id="volumeBar" min="0" max="1" step="0.1" value="1">  
+				    <button id="closedCaption"><img id="ccImg" src="icons/cc-icon.png"></button> --> 
+				</div>   	
+			</div>
+
+		</div>   
+
+		<div id="transcript">
+
+			<p>
+			<span data-pos="1">Now that we've looked at the architecture of the internet, let's see how you might</span> 
+			<span data-pos="2">connect your personal devices to the internet inside your house. </span>
+			<span data-pos="3">Well there are many ways to connect to the internet, and </span>
+			<span data-pos="4">most often people will connect wirelessly. </span>
+			<span data-pos="5">Let's look at an example of how you can connect to the internet. </span>
+			<span data-pos="6">If you live in a city or a town, you probably hav a coaxial cable for </span>
+			<span data-pos="7">cable Internet, or a phone line if you have DSL, running to the outside of </span>
+			<span data-pos="8">your house, that connects you to the Internet Service Provider, or ISP. </span>
+			<span data-pos="9">If you live far out in the country, you'll more likely have </span>
+			<span data-pos="10">a dish outside your house, connecting you wirelessly to your closest ISP, or </span>
+			<span data-pos="11">you might also use the telephone system. </span>
+			<span data-pos="12">Whether a wire comes straight from the ISP hookup outside your house, or </span>
+			<span data-pos="13">it travels over radio waves from your roof, </span>
+			<span data-pos="14">the first stop a wire will make once inside your house, is at your modem. </span>
+			<span data-pos="15">A modem is what connects the internet to your network at home. </span>
+			<span data-pos        ="16">A few common residential modems are DSL are...</span>
+			</p>																	
+
+		</div>
+
+  	</div>
+
+	<script src="http://code.jquery.com/jquery-1.12.0.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/app.js" type="text/javascript" charset="utf-8"></script>
+
+  </body>
+</html>
+

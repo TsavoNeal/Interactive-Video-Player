@@ -1,0 +1,107 @@
+/* Tested on Chrome, Firefox, and Internet Explorer. */
+
+/* BASE STYLES
+------------------------------------------------------- */
+
+button {
+	border: none;
+	background: none;
+	outline: none;
+}
+
+/* LAYOUT
+------------------------------------------------------- */
+
+#wrapper {
+	width: 50%;
+	margin: 0 auto;
+}
+
+#videoContainer {        
+	position: relative;
+	height: 50%;
+	height: 50%;
+}
+
+#video {
+	width: 100%;
+}
+
+#transcript p {
+	font-family: 'Varela Round', sans-serif;
+	font-size: 18px;
+	line-height: 36px;
+	margin: 20px;
+}
+
+.highlight {
+	color: #ff9900;
+}
+
+/* VIDEO CONTROLS
+------------------------------------------------------- */
+
+#videoControls {
+	position: absolute;
+	top: 90%;
+	left: 1.5%;
+	right: 1.5%;
+	padding: 5px;
+}
+
+#progress {
+	width: 0%;
+	position: absolute;
+	top: -10px;
+	-webkit-appearance: none;
+	background-color: #ff9900;  
+	height: 5px;
+	z-index: 1;
+}
+#progress::-webkit-slider-thumb {
+    -webkit-appearance: none !important;
+}
+
+#progressBar {
+	width: 98.5%;
+	position: absolute;
+	top: -10px;
+	right: 1%;
+	-webkit-appearance: none;
+	background-color: #6d6e6d;  
+	height: 5px;
+	z-index: 0;
+}
+#progressBar:focus {
+  	outline: none; 
+}
+#progressBar::-webkit-slider-thumb {
+    -webkit-appearance: none !important;
+    height: 0px;
+    width: 0px;
+}
+
+#buttons {
+	opacity: 0; 
+	transition: opacity .3s ease-out;
+}
+#videoContainer:hover #buttons {
+	opacity: 1.0;
+} 
+
+#duration {
+	color: white;
+	font-family: 'Varela Round', sans-serif;
+	font-size: 14px;
+	position: relative;
+	bottom: 5px;
+	left: 5px;
+}
+
+#mute, #closedCaption, #fullScreen, #volumeBar {
+	float: right;
+}
+
+#volumeBar {
+	width: 60px;
+}
