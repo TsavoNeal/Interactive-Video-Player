@@ -57,9 +57,7 @@ button {
 	background-color: #ff9900;  
 	height: 5px;
 	z-index: 1;
-}
-#progress::-webkit-slider-thumb {
-    -webkit-appearance: none !important;
+	pointer-events: none;	
 }
 
 #progressBar {
@@ -77,9 +75,13 @@ button {
 }
 #progressBar::-webkit-slider-thumb {
     -webkit-appearance: none !important;
-    height: 0px;
-    width: 0px;
+    height: 0;
+    width: 0;
 }
+#progressBar::-moz-range-thumb {
+	visibility: hidden !important ;
+}
+
 
 #buttons {
 	opacity: 0; 
