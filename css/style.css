@@ -1,4 +1,4 @@
-/* Tested on Chrome, Firefox, and Internet Explorer. */
+/* Tested on Chrome, Firefox, and Safari. */
 
 /* BASE STYLES
 ------------------------------------------------------- */
@@ -106,4 +106,20 @@ button {
 
 #volumeBar {
 	width: 60px;
+}
+
+/* =========================================
+   MEDIA QUERIES */
+
+@media screen and (max-width: 768px) {
+
+	#wrapper {
+		width:  80%;
+	}
+
+	#transcript p {
+		font-size: 14px;
+		line-height: 24px;
+	}
+
 }

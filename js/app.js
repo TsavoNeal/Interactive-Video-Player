@@ -75,7 +75,7 @@ $video.on("timeupdate", function() {
 $progressBar[0].addEventListener("change", function() {
 	var time = $video[0].duration * ($progressBar[0].value / 100);
 	$video[0].currentTime = time;
-});
+}); 
 
 // Update progress bar as video plays
 $video[0].addEventListener("timeupdate", function() { 
