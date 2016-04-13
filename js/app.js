@@ -9,8 +9,10 @@ var $progressBar = $("#progressBar");
 var $progress = $("#progress");
 var $playButton = $("#play");
 var $muteButton = $("#mute");
+var $volumeSlider = $("#volumeSlider");
 var $fullScreenBtn = $("#fullScreen");
 var $duration = $("#duration");
+var $fastFwd = $("#fastFwd");
    
 /* VIDEO PLAYER 
 ------------------------------------------------------- */
@@ -35,6 +37,17 @@ function muteVideo() {
 		$video[0].muted = false;
 		$muteButton.find("img").attr("src", "icons/volume-on-icon.png");				
 	}	
+}
+
+// Changes video playback rate
+function changeSpeed() {
+	if($video[0].playbackRate === 1) {
+		$video[0].playbackRate = 2;
+		$fastFwd.text("2x Speed");
+	} else if ($video[0].playbackRate === 2) {
+		$video[0].playbackRate = 1;
+		$fastFwd.text("1x Speed");				
+	}
 }
 
 // Play/pause on video click
@@ -88,9 +101,34 @@ $playButton.click(function() {
 	playVideo();
 });
 
+// 2x speed with right arrow
+$("body").on("keydown", function(e) {
+	if(e.keyCode === 39) {	
+	    e.preventDefault();		
+		changeSpeed();
+	}
+});
+// Normal Speed
+$("body").on("keydown", function(e) {
+	if(e.keyCode === 37) {	
+	    e.preventDefault();		
+		changeSpeed();
+	}
+});
+
+// Fast Forward Button 
+$fastFwd.click(function() {
+	changeSpeed();
+});
+
 // Mute video on button click
 $muteButton.click(function() {
 	muteVideo();
+});
+
+// Volue slider
+$volumeSlider.on("change", function(){ 
+	$video[0].volume = $volumeSlider[0].value;
 });
 
 // Fullscreen on button click
@@ -114,44 +152,49 @@ $fullScreenBtn.click(function() {
 	$video.on("timeupdate", function() {
 		var $videoTime = $video[0].currentTime;
 		function addHighlight(n) {
-			$('span[data-pos]').removeClass("highlight");
-			$('span[data-pos="' + n + '"]').addClass("highlight");
+			$('span[data-start]').removeClass("highlight");
+			$('span[data-start="' + n + '"]').addClass("highlight");
 		}
 
-			if ($videoTime > 0.240 && $videoTime < 4.130) {
-				addHighlight(1);
+			if ($videoTime > -1 && $videoTime < 4.130) {
+				addHighlight(0);
 			} else if ($videoTime > 4.13 && $videoTime < 7.535) {
-				addHighlight(2);
+				addHighlight(4.13);
 			} else if ($videoTime > 7.535 && $videoTime < 11.27) {
-				addHighlight(3);
+				addHighlight(7.535);
 			} else if ($videoTime > 11.27 && $videoTime < 13.96) {
-				addHighlight(4);
+				addHighlight(11.27);
 			} else if ($videoTime > 13.96 && $videoTime < 17.94) {
-				addHighlight(5);
+				addHighlight(13.96);
 			} else if ($videoTime > 17.94 && $videoTime < 22.37) {
-				addHighlight(6);
+				addHighlight(17.94);
 			} else if ($videoTime > 22.37 && $videoTime < 26.88) {
-				addHighlight(7);
+				addHighlight(22.37);
 			} else if ($videoTime > 26.88 && $videoTime < 30.92) {
-				addHighlight(8);
+				addHighlight(26.88);
 			} else if ($videoTime > 32.1 && $videoTime < 34.73) {
-				addHighlight(9);
+				addHighlight(32.1);
 			} else if ($videoTime > 34.73 && $videoTime < 39.43) {
-				addHighlight(10);
+				addHighlight(34.73 );
 			} else if ($videoTime > 39.43 && $videoTime < 41.19) {
-				addHighlight(11);
+				addHighlight(39.43);
 			} else if ($videoTime > 42.35 && $videoTime < 46.3) {
-				addHighlight(12);
+				addHighlight(42.35);
 			} else if ($videoTime > 46.3 && $videoTime < 49.27) {
-				addHighlight(13);
+				addHighlight(46.3);
 			} else if ($videoTime > 49.27 && $videoTime < 53.76) {
-				addHighlight(14);
+				addHighlight(49.27);
 			} else if ($videoTime > 53.76 && $videoTime < 57.78 ) {
-				addHighlight(15);
+				addHighlight(53.76);
 			} else if ($videoTime > 57.78) {
-				addHighlight(16);
+				addHighlight(57.78);
 			}
 
 	});
 
-
+// Click on transcript to be taken to that time in the video
+$("span").click(function() {
+	var transcriptTime = $(this).attr("data-start");
+	$video[0].currentTime = transcriptTime;
+});
+  
