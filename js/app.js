@@ -197,4 +197,3 @@ $("span").click(function() {
 	var transcriptTime = $(this).attr("data-start");
 	$video[0].currentTime = transcriptTime;
 });
-  
