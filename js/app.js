@@ -3,8 +3,11 @@
 
 // Video
 var $video = $("#video");
+var $videoContainer = $("#videoContainer");
 
-// Video Controls
+// Video Control s
+var $videoControls = $("#videoControls");
+var $buttonControls = $("#buttonControls");
 var $progressBar = $("#progressBar");
 var $progress = $("#progress");
 var $playButton = $("#play");
@@ -20,11 +23,13 @@ var $fastFwd = $("#fastFwd");
 // Toggles play/pause for the video
 function playVideo() {      
 	if($video[0].paused) {
-    	$video[0].play();
-    	$playButton.find("img").attr("src", "icons/pause-icon.png"); 
+		$video[0].play();
+		$playButton.find("img").attr("src", "icons/pause-icon.png"); 
+		$buttonControls.hide();
+		$videoControls.css("margin-top", "5%");	     	
 	} else {
 		$video[0].pause();
-    	$playButton.find("img").attr("src", "icons/play-icon.png");  			
+		$playButton.find("img").attr("src", "icons/play-icon.png");			
 	}		
 }
 
@@ -50,6 +55,19 @@ function changeSpeed() {
 	}
 }
 
+function launchFullscreen() {
+  if($video[0].requestFullscreen) {
+    $video[0].requestFullscreen();
+  } else if($video[0].mozRequestFullScreen) {
+    $video[0].mozRequestFullScreen();
+  } else if($video[0].webkitRequestFullscreen) {
+    $video[0].webkitRequestFullscreen();
+  } else if($video[0].msRequestFullscreen) {
+    $video[0].msRequestFullscreen();
+  }
+}
+
+
 // Play/pause on video click
 $video.click(function() {
 	playVideo();
@@ -58,7 +76,7 @@ $video.click(function() {
 // Play/pause on spacebar 
 $("body").on("keydown", function(e) {
 	if(e.keyCode === 32 ) {	
-	    e.preventDefault();		
+		e.preventDefault();		
 		playVideo();     
 	}
 });
@@ -66,7 +84,7 @@ $("body").on("keydown", function(e) {
 // Mute/sound on m key
 $("body").on("keydown", function(e) {
 	if(e.keyCode === 77 ) {
-	    e.preventDefault();		
+		e.preventDefault();		
 		muteVideo();
 	}
 });
@@ -83,6 +101,20 @@ $video.on("timeupdate", function() {
 
 /* VIDEO CONTROLS
 ------------------------------------------------------- */
+
+// Hide button controls when video is playing 
+$videoContainer.on("mouseleave", function() {
+	if($video[0].paused === false) {
+		$buttonControls.hide();
+		$videoControls.css("margin-top", "5%");	  
+	}
+});
+
+// Show button controls on hover
+$videoContainer.on("mouseover", function() {
+		$buttonControls.show();
+		$videoControls.css("margin-top", "0");	  
+});
 
 // Progress bar
 $progressBar[0].addEventListener("change", function() {
@@ -104,14 +136,14 @@ $playButton.click(function() {
 // 2x speed with right arrow
 $("body").on("keydown", function(e) {
 	if(e.keyCode === 39) {	
-	    e.preventDefault();		
+		e.preventDefault();		
 		changeSpeed();
 	}
 });
 // Normal Speed
 $("body").on("keydown", function(e) {
 	if(e.keyCode === 37) {	
-	    e.preventDefault();		
+		e.preventDefault();		
 		changeSpeed();
 	}
 });
@@ -131,19 +163,20 @@ $volumeSlider.on("change", function(){
 	$video[0].volume = $volumeSlider[0].value;
 });
 
-// Fullscreen on button click
+/* Fullscreen on button click
 $fullScreenBtn.click(function() {
 	if ($video[0].webkitRequestFullscreen()) {
 		$video[0].webkitRequestFullscreen();
-	} else if ($video[0].msRequestFullscreen()) {
-		$video[0].msRequestFullscreen();
-	} else if ($video[0].mozRequestFullscreen()) {
-		$video[0].mozRequestFullscreen();
-	} else if ($video[0].requestFullscreen()) {
-		$video[0].requestFullscreen();
+	} else if ($video[0].mozRequestFullScreen()) {
+		$video[0].mozRequestFullScreen();
+	} else if ($video[0].msRequestFullScreen()) {
+		$video[0].msRequestFullScreen();
 	}
-	
-});
+}); */
+
+$fullScreenBtn.click(function() {
+	launchFullscreen();
+}); 
 
 /* VIDEO TRANSCRIPT 
 ------------------------------------------------------- */
@@ -197,3 +230,6 @@ $("span").click(function() {
 	var transcriptTime = $(this).attr("data-start");
 	$video[0].currentTime = transcriptTime;
 });
+
+
+
